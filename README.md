@@ -1,1 +1,0 @@
-- http://smart.ataglance.jp/2015-06-11-try-react-jade/
