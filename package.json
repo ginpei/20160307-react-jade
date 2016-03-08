@@ -1,5 +1,12 @@
 {
   "private": "true",
+  "scripts": {
+    "start": "webpack"
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14"
+  }
 }
