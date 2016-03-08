@@ -1,5 +1,13 @@
 {
   "private": "true",
+  "scripts": {
+    "start": "node c; node_modules/.bin/browserify -o bundle.js -t babelify src.js"
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "react": "^0.14.7",
+    "react-jade": "^2.5.0"
+  }
 }
