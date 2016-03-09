@@ -1,22 +1,27 @@
-require('./style.css');
-import text from './content.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
+var jade = require('react-jade');  // leave from import syntax to keep precompile
 
 class Item extends React.Component {
 	render() {
-		return <li>{this.props.name}</li>
+		return jade.compile(`
+li= this.props.name
+`).call(this)
 	}
 }
 
 class App extends React.Component {
 	render() {
-		const names = ['Alice', 'Bob', 'Carol'];
-		return (
-			<ul>
-				{names.map(n=> <Item key={n} name={n} /> )}
-			</ul>
-		);
+		let users = [
+			{ id:1, name:'Alice' },
+			{ id:2, name:'Bob' },
+			{ id:3, name:'Carol' },
+		];
+		return jade.compile(`
+ul
+	each u in users
+		Item(key=u.id,name=u.name)
+`).call(this)
 	}
 }
 
