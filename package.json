@@ -1,7 +1,7 @@
 {
   "private": "true",
   "scripts": {
-    "start": "browserify -t [ babelify --presets [react es2015] ] --transform react-jade entry.js -o bundle.js"
+    "start": "browserify entry.js -o bundle.js -t [ babelify --presets [react es2015] ] -t react-jade"
   },
   "dependencies": {},
   "devDependencies": {
