@@ -16,7 +16,7 @@ path =
 		css: 'src/**/*.sass'
 		js: 'src/**/*.js'
 		js_entry: 'src/entry.js'
-		html: 'src/**/*.html'
+		html: 'src/**/*.jade'
 		lib: [
 			# 'node_modules/react/dist/react.js'
 			# 'node_modules/react-dom/dist/react-dom.js'
@@ -56,10 +56,10 @@ g.task 'html', ['build_html'], ->
 # divide to assure loaded HTML that it's updated
 g.task 'build_html', ->
 	g.src path.src.html
-		# .pipe plumber()
-		# .pipe sourcemaps.init()
-		# .pipe jade(client:false)
-		# .pipe sourcemaps.write()
+		.pipe plumber()
+		.pipe sourcemaps.init()
+		.pipe jade(client:false)
+		.pipe sourcemaps.write()
 		.pipe g.dest(path.dest.public)
 
 g.task 'lib', ->
