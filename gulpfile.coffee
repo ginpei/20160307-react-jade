@@ -1,14 +1,16 @@
 babelify = require 'babelify'
 browserify = require 'browserify'
 del = require 'del'
+domain = require 'domain'
 g = require 'gulp'
 jade = require 'gulp-jade'
 livereload = require 'gulp-livereload'
 plumber = require 'gulp-plumber'
 react_jade = require 'react-jade'
+rename = require 'gulp-rename'
 sass = require 'gulp-sass'
-source = require 'vinyl-source-stream'
 sourcemaps = require 'gulp-sourcemaps'
+tap = require 'gulp-tap'
 webserver = require 'gulp-webserver'
 
 path =
@@ -38,11 +40,29 @@ g.task 'css', ->
 		.pipe livereload()
 
 g.task 'js', ->
+	g.src path.src.js_entry, {read:false}
+		.pipe tap (file)=>
+			d = domain.create()
+			d.on 'error', (error)=>
+				console.error error.stack
+			d.run ()=>
+				file.contents = browserify({ entries:[file.path], debug:true })
+					.transform babelify, { presets: ['react','es2015']}
+					.transform react_jade
+					.bundle()
+			d
+		.pipe rename(path.dest.js_bundle)
+		.pipe g.dest(path.dest.public)
+		.pipe livereload()
+
+g.task 'jsxxx', ->
 	return browserify({ entries:[path.src.js_entry], debug:true })
-		# .pipe plumber()
 		.transform babelify, { presets: ['react','es2015']}
 		.transform react_jade
 		.bundle()
+		.on 'error', (error)=>
+			console.error error.stack
+			this.emit 'end'
 		.pipe source(path.dest.js_bundle)
 		.pipe g.dest(path.dest.public)
 		.pipe livereload()
