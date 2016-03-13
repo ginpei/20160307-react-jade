@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+var React = require('react');
+var ReactDOM = require('react-dom');
 var jade = require('react-jade');  // leave from import syntax to keep precompile
 
 var Item = require('./Item');

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Browserify</title>
+	</head>
+	<body>
+		<h1>Hello, React!</h1>
+		<div id="app">...</div>
+		<script src="bundle.js"></script>
+		<script>
+			// LiveReload
+			if (location.search === '?live') {
+				var elScript = document.createElement('script');
+				elScript.src = '//' + location.hostname + ':35729/livereload.js';
+				document.body.appendChild(elScript);
+			}
+		</script>
+	</body>
+</html>
