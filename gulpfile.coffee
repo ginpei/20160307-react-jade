@@ -38,13 +38,11 @@ g.task 'css', ->
 		.pipe livereload()
 
 g.task 'js', ->
-	return browserify({ entries:[path.src.js_entry] })
+	return browserify({ entries:[path.src.js_entry], debug:true })
 		# .pipe plumber()
-		# .pipe sourcemaps.init()
 		.transform babelify, { presets: ['react','es2015']}
 		.transform react_jade
 		.bundle()
-		# .pipe sourcemaps.write()
 		.pipe source(path.dest.js_bundle)
 		.pipe g.dest(path.dest.public)
 		.pipe livereload()
